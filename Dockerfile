@@ -11,7 +11,7 @@ WORKDIR /opt/app
 COPY . .
 RUN yarn global add node-gyp
 RUN yarn config set network-timeout 600000 -g && yarn install --production
-ENV PATH=/opt/node_modules/.bin:$PATH
+ENV PATH=/opt/app/node_modules/.bin:$PATH
 RUN yarn build
 
 # Creating final production image

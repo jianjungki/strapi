@@ -4,6 +4,7 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ENV NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
+RUN yarn set version stable
 WORKDIR /opt
 COPY . ./
 # Install dependencies

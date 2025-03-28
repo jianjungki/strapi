@@ -5,8 +5,8 @@ ENV NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 RUN yarn set version stable
-WORKDIR /opt/
-COPY package.json yarn.lock ./
+WORKDIR /opt
+COPY . ./
 # Install dependencies
 RUN yarn install
 RUN yarn global add node-gyp

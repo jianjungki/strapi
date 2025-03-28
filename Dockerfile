@@ -1,5 +1,5 @@
 # Creating multi-stage build for production
-FROM node:18-alpine as build
+FROM node:18.20.8-alpine AS build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
 ENV NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
@@ -9,12 +9,9 @@ COPY package.json yarn.lock ./
 RUN yarn global add node-gyp
 RUN yarn config set network-timeout 600000 -g && yarn install --production
 ENV PATH=/opt/node_modules/.bin:$PATH
-WORKDIR /opt/app
-COPY . .
-RUN yarn build
 
 # Creating final production image
-FROM node:18-alpine
+FROM node:18.20.8-alpine
 RUN apk add --no-cache vips-dev
 ENV NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}

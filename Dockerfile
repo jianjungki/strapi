@@ -8,9 +8,8 @@ RUN yarn set version stable
 WORKDIR /opt
 COPY . ./
 # Install dependencies
-RUN yarn install
-RUN yarn global add node-gyp
 RUN yarn config set network-timeout 600000 -g && yarn install --production
+# RUN yarn global add node-gyp
 ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
